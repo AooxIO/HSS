@@ -8,8 +8,6 @@ function searchArticle() {
     const articleId = document.getElementById('searchInput').value.trim();
     const articles = JSON.parse(localStorage.getItem('articles'));
     const resultSection = document.getElementById('resultSection');
-    
-    // Clear previous results
     resultSection.innerHTML = '';
 
     if (articles[articleId]) {
@@ -23,17 +21,12 @@ function searchArticle() {
 
         const addButton = document.createElement('button');
         addButton.textContent = 'Add';
-        addButton.onclick = function() {
-            adjustStock(articleId, parseInt(quantityInput.value) || 0, true);
-        };
+        addButton.onclick = function() { adjustStock(articleId, parseInt(quantityInput.value) || 0, true); };
 
         const removeButton = document.createElement('button');
         removeButton.textContent = 'Remove';
-        removeButton.onclick = function() {
-            adjustStock(articleId, parseInt(quantityInput.value) || 0, false);
-        };
+        removeButton.onclick = function() { adjustStock(articleId, parseInt(quantityInput.value) || 0, false); };
 
-        // Append elements to the result section
         resultSection.appendChild(articleInfo);
         resultSection.appendChild(quantityInput);
         resultSection.appendChild(addButton);
@@ -45,26 +38,21 @@ function searchArticle() {
 
 function adjustStock(articleId, quantity, isAdding) {
     const articles = JSON.parse(localStorage.getItem('articles'));
-    
     if (isAdding) {
         articles[articleId] = (articles[articleId] || 0) + quantity;
     } else {
-        // Prevent stock from going negative
         articles[articleId] = Math.max(0, (articles[articleId] || 0) - quantity);
     }
-
     localStorage.setItem('articles', JSON.stringify(articles));
     alert(`Stock for Article Number: ${articleId} updated. New Quantity: ${articles[articleId]}`);
-    // Optionally, refresh the search to show the new quantity
-    searchArticle();
+    searchArticle(); // Refresh the search result to show updated stock
 }
 
 function verifyAccessCode() {
     const code = document.getElementById('accessCodeInput').value;
     if (code === '1010') {
         document.getElementById('articlesList').style.display = 'block';
-        document.getElementById('closeArticlesListButton').style.display = 'block'; // Show the close button
-        populateArticlesList(); // Populate the list only after correct code is entered
+        populateArticlesList();
     } else {
         alert('Incorrect code. Access denied.');
     }
