@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="searchSection">
+        <input type="text" id="searchInput" placeholder="Enter article number...">
+        <button onclick="searchArticle()">Search</button>
+    </div>
+
+    <div id="codeAccessSection">
+        <input type="password" id="accessCodeInput" placeholder="Enter Access Code...">
+        <button onclick="verifyAccessCode()">Access Article List</button>
+    </div>
+
+    <div id="articlesList" style="display: none;">
+        <!-- Article List and Manage Menu will be populated here -->
+    </div>
+
+    <div id="resultSection"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
